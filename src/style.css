@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+/*
+ * 统一的桌面端视觉 token
+ * 目标：更强的层次、更干净的玻璃感、减少“默认组件拼起来”的粗糙感
+ */
+
+@theme {
+  /* Dark theme */
+  --color-base: #0f1218;
+  --color-base-subtle: #151a22;
+  --color-base-inset: #0b0f14;
+
+  --color-text: #e7ebf3;
+  --color-text-2: #a5afbf;
+  --color-text-3: #7c8699;
+  --color-text-4: #5b6577;
+
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-hard: rgba(255, 255, 255, 0.14);
+
+  --color-accent: #25c07a;
+  --color-accent-text: #f7faff;
+  --color-accent-dim: rgba(37, 192, 122, 0.14);
+  --color-accent-ghost: rgba(37, 192, 122, 0.14);
+
+  --color-green: #34d399;
+  --color-red: #fb7185;
+  --color-amber: #fbbf24;
+
+  --color-sidebar: rgba(15, 19, 27, 0.68);
+  --color-chat: rgba(20, 25, 34, 0.55);
+  --color-inset: rgba(255, 255, 255, 0.05);
+  --color-inset-border: rgba(255, 255, 255, 0.09);
+  --color-panel: rgba(18, 22, 30, 0.82);
+  --color-panel-strong: rgba(24, 29, 40, 0.9);
+
+  --color-bubble-self: rgba(37, 192, 122, 0.18);
+  --color-bubble-peer: rgba(255, 255, 255, 0.06);
+}
+
+/* Light theme */
+.light {
+  --color-base: #f3f6fb;
+  --color-base-subtle: #ffffff;
+  --color-base-inset: #eef2f8;
+
+  --color-text: #171b24;
+  --color-text-2: #4c5567;
+  --color-text-3: #788095;
+  --color-text-4: #9da7ba;
+
+  --color-line: rgba(15, 23, 42, 0.08);
+  --color-line-hard: rgba(15, 23, 42, 0.12);
+
+  --color-accent: #25c07a;
+  --color-accent-text: #ffffff;
+  --color-accent-dim: rgba(37, 192, 122, 0.12);
+  --color-accent-ghost: rgba(37, 192, 122, 0.10);
+
+  --color-green: #10b981;
+  --color-red: #ef4444;
+  --color-amber: #d97706;
+
+  --color-sidebar: rgba(248, 250, 255, 0.72);
+  --color-chat: rgba(255, 255, 255, 0.56);
+  --color-inset: rgba(15, 23, 42, 0.04);
+  --color-inset-border: rgba(15, 23, 42, 0.08);
+  --color-panel: rgba(255, 255, 255, 0.82);
+  --color-panel-strong: rgba(255, 255, 255, 0.94);
+
+  --color-bubble-self: rgba(37, 192, 122, 0.12);
+  --color-bubble-peer: rgba(15, 23, 42, 0.05);
+}
+
+/* Base reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  background: var(--color-base);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;
+}
+
+body {
+  font-family:
+    "Inter",
+    "SF Pro Display",
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    system-ui,
+    sans-serif;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  background:
+    radial-gradient(circle at 16% 10%, rgba(37, 192, 122, 0.12), transparent 26%),
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.05), transparent 22%),
+    radial-gradient(circle at 50% 110%, rgba(255, 255, 255, 0.06), transparent 26%),
+    linear-gradient(180deg, var(--color-base) 0%, var(--color-base-inset) 100%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(127, 140, 168, 0.45);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 140, 168, 0.72);
+}
+
+/* Drag helpers */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-accent-ghost);
+  color: inherit;
+}
+
+/* Motion */
+* {
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.18s ease,
+    box-shadow 0.22s ease,
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+input,
+textarea,
+button {
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    background-color 0.16s ease,
+    transform 0.16s ease,
+    opacity 0.16s ease;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+}
+
+@keyframes float-gentle {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes send-feedback-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(-3px) scale(0.96);
+  }
+
+  14% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-1px) scale(0.98);
+  }
+}
+
+.send-feedback-pop {
+  animation: send-feedback-pop 1.2s ease both;
+  transform-origin: left center;
+}
+
+.message-bubble {
+  box-shadow:
+    0 10px 28px rgba(2, 6, 23, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}

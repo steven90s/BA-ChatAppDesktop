@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nicegram/nicetauri/refs/heads/main/crates/tauri-cli/schema.json",
+  "productName": "ChatApp",
+  "version": "0.1.0",
+  "identifier": "com.chatapp.local",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "局域网聊天",
+        "width": 900,
+        "height": 700,
+        "minWidth": 680,
+        "minHeight": 480,
+        "decorations": false,
+        "transparent": true,
+        "devtools": true
+      }
+    ]
+  }
+}
